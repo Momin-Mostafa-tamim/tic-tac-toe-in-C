@@ -7,15 +7,15 @@ void board(char *array) //done
     printf("-----------");
     printf("\n %c | %c | %c \n", *(array + 6), *(array + 7), *(array + 8));
 }
-void name(char *a, char *b) //done
+void player_name(char *player1_name, char *player2_name) //done
 {
     printf("Enter the name for player 1 : \n");
-    scanf("%s", a);
+    scanf("%s", player1_name);
     printf("Enter the name for second player : \n");
-    scanf("%s", b);
-    printf("%s is 'X' and %s is 'Y'", a, b);
+    scanf("%s", player2_name);
+    printf("%s is 'X' and %s is 'Y'", player1_name, player2_name);
 }
-void move(char *array, char marker) //done
+void player_move(char *array, char player_marker_selector) //done
 {
     int temp;
     printf("Enter a number to place your marker : ");
@@ -28,10 +28,10 @@ void move(char *array, char marker) //done
     else
     {
         //it will also change the array.(board)//done
-        *(array + temp) = marker;
+        *(array + temp) = player_marker_selector;
     }
 }
-char marker(int a) //done
+char player_marker_selector(int a) //done
 {
     if (a % 2 == 0)
     {
@@ -134,12 +134,12 @@ int main()
     char array[20] = "0123456789";
     char name1[100];
     char name2[100];
-    int a = 0; //needed for marker()
+    int player_mark = 0; //needed for player_marker_selector()
     int win = 0;
-    name(name1, name2);
+    player_name(name1, name2);
     board(array);
 
-    while (a != 9 && win != 1 && win != 2)
+    while (player_mark != 9 && win != 1 && win != 2)
     {
         win = winlogic(array);
         if (win == 1 || win == 2)
@@ -156,9 +156,9 @@ int main()
         else
         {
 
-            char mark = marker(a);
-            ++a;
-            move(array, mark);
+            char mark = player_marker_selector(player_mark);
+            ++player_mark;
+            player_move(array, mark);
             board(array);
         }
     }
